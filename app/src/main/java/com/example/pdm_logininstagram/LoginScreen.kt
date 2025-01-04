@@ -81,6 +81,8 @@ fun Body(modifier: Modifier) {
     var password by rememberSaveable { mutableStateOf("") }
     var isLoginEnable by rememberSaveable { mutableStateOf(false) }
 
+    isLoginEnable = (email != "") && (password != "")
+
     Column(
         modifier = modifier
     )
@@ -123,7 +125,10 @@ fun Email(email: String, function: (String) -> Unit)
         maxLines = 1,
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
+            focusedPlaceholderColor = Color(0xFF999999),
+            unfocusedPlaceholderColor = Color(0xFF999999),
             focusedTextColor = Color(0xFF020202),
+            unfocusedTextColor = Color(0xFF020202),
             containerColor = Color(0xFFF0F0F0),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
@@ -150,7 +155,10 @@ fun Password(password: String, function: (String) -> Unit)
         maxLines = 1,
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
+            focusedPlaceholderColor = Color(0xFF999999),
+            unfocusedPlaceholderColor = Color(0xFF999999),
             focusedTextColor = Color(0xFF020202),
+            unfocusedTextColor = Color(0xFF020202),
             containerColor = Color(0xFFF0F0F0),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
