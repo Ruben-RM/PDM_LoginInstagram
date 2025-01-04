@@ -2,18 +2,28 @@ package com.example.pdm_logininstagram
 
 import android.app.Activity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -31,11 +41,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Preview(showBackground = true)
 @Composable
@@ -66,22 +79,28 @@ fun Header(modifier: Modifier)
 }
 
 @Composable
-fun Body(modifier: Modifier)
-{
-    var email by rememberSaveable{ mutableStateOf("") }
-    var password by rememberSaveable{ mutableStateOf("") }
+fun Body(modifier: Modifier) {
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var isLoginEnable by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = modifier
     )
     {
         ImageLogo(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.size(16.dp))
         Email(email) { email = it }
+        Spacer(modifier = Modifier.size(8.dp))
         Password(password) { password = it }
-        //ForgotPassword()
-        //LoginButton()
-        //LoginDivisor()
-        //LoginSocial()
+        Spacer(modifier = Modifier.size(8.dp))
+        ForgotPassword(Modifier.align(Alignment.End))
+        Spacer(modifier = Modifier.size(16.dp))
+        LoginButton(isLoginEnable)
+        Spacer(modifier = Modifier.size(16.dp))
+        LoginDivisor()
+        Spacer(modifier = Modifier.size(32.dp))
+        LoginSocial()
     }
 }
 
@@ -168,7 +187,106 @@ fun Password(password: String, function: (String) -> Unit)
 }
 
 @Composable
+fun ForgotPassword(modifier: Modifier) {
+    Text(
+        text = "Forgot Password?",
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color(0xFF4EA8E9),
+        modifier = modifier
+            .clickable { checkForgotPassword() }
+    )
+}
+
+@Composable
+fun LoginButton(isLoginEnable: Boolean)
+{
+    Button(
+        onClick = { checkLogin() },
+        enabled = isLoginEnable,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White,
+            disabledContentColor = Color.White,
+            containerColor = Color(0xFF4EA8E9),
+            disabledContainerColor = Color(0xFF78C8F9)
+        )
+    ){
+        Text( text = "Log In")
+    }
+}
+
+@Composable
+fun LoginDivisor() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    )
+    {
+        HorizontalDivider(
+            modifier = Modifier
+                .background(Color(0xFF9F9F9F))
+                .height(1.dp)
+                .weight(1f)
+        )
+
+        Text(
+            text = "OR",
+            modifier = Modifier.padding(horizontal = 6.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 12.sp,
+            color = Color(0xFFB5B5B5)
+        )
+
+        HorizontalDivider(
+            modifier = Modifier
+                .background(Color(0xFF9F9F9F))
+                .height(1.dp)
+                .weight(1f)
+        )
+    }
+}
+
+@Composable
+fun LoginSocial() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    )
+    {
+        Image(
+            painter = painterResource(R.drawable.fb),
+            contentDescription = "FB",
+            modifier = Modifier.size(16.dp)
+        )
+        Text(
+            text = "Continue as Rubén",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4EA8E9),
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .clickable { checkSocial() }
+        )
+    }
+}
+
+@Composable
 fun Footer(modifier: Modifier)
 {
 
+}
+
+
+fun checkForgotPassword() {
+    TODO("Not yet implemented")
+}
+
+fun checkLogin() {
+    TODO("Not yet implemented")
+}
+
+fun checkSocial() {
+    TODO("Not yet implemented")
 }
